@@ -44,7 +44,13 @@ namespace ShapeDrawer
         {
             foreach(Shape shape in _shapes)
             {
-                shape.Selected = shape.IsAt(pt); // im not sure if this works. i tried to do it without a if statement 
+                if(shape.IsAt(pt))
+                {
+                    shape.Selected = true;
+                } else
+                {
+                    shape.Selected = false;
+                }
             }
         }
 
@@ -56,10 +62,23 @@ namespace ShapeDrawer
                 if(shape.Selected)  // returns true if a shape is selected 
                 {
                     result.Add(shape);
+                    shape.DrawOutline();
                 }
             }
             return result;
         }
+
+        public void Delete()
+        {
+            foreach (Shape shape in _shapes.ToList()) // i got this from stackoverflow(i dont know if thats illegal) https://stackoverflow.com/questions/1582285/how-to-remove-elements-from-a-generic-list-while-iterating-over-it
+            {
+                if(shape.Selected)
+                {
+                    _shapes.Remove(shape);
+                }
+            }
+        }
+        
         public Color Background
         {
             get
@@ -71,5 +90,7 @@ namespace ShapeDrawer
                 _background = value;
             }
         }
+
+
     }
 }

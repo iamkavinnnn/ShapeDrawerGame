@@ -12,19 +12,21 @@ namespace ShapeDrawer
         // Variables
         private Color _color; 
         private float _x, _y;
-        private int _width, _height;
         private bool _selected;
 
-        public Shape() 
+        public Shape(Color color) 
         {
             _x = 0;
             _y = 0;
-            _width = 100;
-            _height = 100;
-            _color = Color.Green;
+            _color = color;
         }
 
-        public Color Color // bad naming for this class
+        public Shape() : this(Color.Yellow)
+        {
+
+        }
+
+        public Color Color
         {
             get { return _color; }
             set { _color = value; }
@@ -33,38 +35,25 @@ namespace ShapeDrawer
         public float X { get { return _x; } set { _x = value; } }
         public float Y { get { return _y; } set { _y = value; } }
 
-        public int Width { get { return _width; } set{ _width = value; } }
-        public int Height { get { return _height; } set { _height = value; } }
-
-        public void Draw()
+        public virtual void Draw()
         {
-            SplashKit.FillRectangle(_color, X, Y, Width, Height);
-            if (Selected) 
-            { 
-                this.DrawOutline();
-            }
+            
         }
 
-        public bool IsAt(Point2D pt)
+        public virtual  bool IsAt(Point2D pt)
         {
-            if(pt.X < _width || pt.Y < _height || pt.X > 0 || pt.Y > 0)
-            {
-                return true;
-            } else { return false; }
+            return false; 
         }
 
-        public bool Selected // selects the shape using boolean
+        public bool Selected 
         {
             get { return _selected; }
             set { _selected = value; }
         }
 
-        public void DrawOutline()
-        {
-            if(Selected)
-            {
-                SplashKit.FillRectangle(Color.Black, X - 2, Y - 2, Width + 4, Height + 4);
-            }
+        public virtual void DrawOutline()
+        { 
+            // SplashKit.DrawRectangle(Color.Black, X - 2, Y - 2, Width + 4, Height + 4);
         }
     }
 }
