@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ShapeDrawer
 {
-    public class Shape
+    public abstract class Shape
     {
-        // Variables
+        // Variables or Fields
         private Color _color; 
         private float _x, _y;
         private bool _selected;
@@ -35,15 +35,9 @@ namespace ShapeDrawer
         public float X { get { return _x; } set { _x = value; } }
         public float Y { get { return _y; } set { _y = value; } }
 
-        public virtual void Draw()
-        {
-            
-        }
+        public abstract void Draw();
 
-        public virtual  bool IsAt(Point2D pt)
-        {
-            return false; 
-        }
+        public abstract bool IsAt(Point2D pt);
 
         public bool Selected 
         {
@@ -51,9 +45,7 @@ namespace ShapeDrawer
             set { _selected = value; }
         }
 
-        public virtual void DrawOutline()
-        { 
-            // SplashKit.DrawRectangle(Color.Black, X - 2, Y - 2, Width + 4, Height + 4);
-        }
+        public abstract void DrawOutline();
+        
     }
 }

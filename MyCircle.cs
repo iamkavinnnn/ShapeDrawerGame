@@ -40,8 +40,7 @@ namespace ShapeDrawer
 
         public override bool IsAt(Point2D pt)
         {
-
-            return SplashKit.PointInCircle(pt, SplashKit.CircleAt(X, Y, Radius)); 
+            return SplashKit.PointInCircle(pt, SplashKit.CircleAt(X, Y, Radius)); // this single line of code took me an hour to figure out(crying internally)
         }
     }
 }

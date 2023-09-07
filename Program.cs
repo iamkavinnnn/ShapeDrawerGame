@@ -8,7 +8,8 @@ namespace ShapeDrawer
         private enum ShapeKind
         {
             Rectangle,
-            Circle
+            Circle,
+            Line
         }
         public static void Main()
         {
@@ -33,27 +34,41 @@ namespace ShapeDrawer
                     kindToAdd = ShapeKind.Circle;
                 }
 
+                if (SplashKit.KeyTyped(KeyCode.LKey))
+                {
+                    kindToAdd = ShapeKind.Line;
+                }
+
                 if (SplashKit.MouseClicked(MouseButton.LeftButton))
                 {
-                    Shape newShape = new Shape();
+                    
 
                     if (kindToAdd == ShapeKind.Circle)
                     {
-                        MyCircle newCircle = new MyCircle();
-                        newCircle.X = SplashKit.MouseX();
-                        newCircle.Y = SplashKit.MouseY();
-                        newShape = newCircle;
 
+                        Shape newShape = new MyCircle();
+                        newShape.X = SplashKit.MouseX();
+                        newShape.Y = SplashKit.MouseY();
+                        newDrawing.AddShape(newShape);
                     }
 
                     if (kindToAdd == ShapeKind.Rectangle)
                     {
-                        MyRectangle newRect = new MyRectangle();
-                        newRect.X = SplashKit.MouseX();
-                        newRect.Y = SplashKit.MouseY();
-                        newShape = newRect;
+                        Shape newShape = new MyRectangle();
+                        newShape.X = SplashKit.MouseX();
+                        newShape.Y = SplashKit.MouseY();
+                        newDrawing.AddShape(newShape);
                     }
-                    newDrawing.AddShape(newShape);
+
+                    if(kindToAdd == ShapeKind.Line)
+                    {
+                        Shape newShape = new MyLine();
+                        newShape.X = SplashKit.MouseX();
+                        newShape.Y = SplashKit.MouseY();
+                        newDrawing.AddShape(newShape);
+
+                    }
+                    // newDrawing.AddShape(newShape);
                 }
 
                 if (SplashKit.KeyTyped(KeyCode.SpaceKey))
@@ -72,6 +87,7 @@ namespace ShapeDrawer
                     newDrawing.Delete();
                 }
 
+                
                 newDrawing.Draw();
                 
                 
